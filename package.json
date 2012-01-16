@@ -1,9 +1,9 @@
 {
-  "name": "hosted-hubot",
+  "name": "exobot",
   "version": "0.2.0",
-  "author": "GitHub Inc.",
-  "keywords": "github hubot campfire bot",
-  "description": "A simple helpful Robot for your Company",
+  "author": "Olivine Labs, LLC.",
+  "keywords": "bot based on hubot by Github",
+  "description": "A simple helpful Robot for Olivine Labs based on hubot by Github",
   "licenses": [
     {
       "type": "MIT",
@@ -12,11 +12,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/github/hubot.git"
+    "url": "git@github.com:Olivine-Labs/exobot.git"
   },
   "dependencies": {
     "hubot": "2.1.2",
     "optparse": "1.0.3",
-    "hubot-xmpp": ">= 0.0.1"
+    "hubot-xmpp": "0.2.11"
   }
 }

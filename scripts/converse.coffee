@@ -14,6 +14,10 @@ class Messages
 
   add: (messageText) ->
     message = {num: @nextMessageNum(), message: messageText}
+
+    if(@cache.length) > 5000
+      @cache = @cache.slice(@cache.length - 5000, @cache.length)
+
     @cache.push message
     @robot.brain.data.messages = @cache
     message
@@ -23,7 +27,7 @@ class Messages
   random: -> @cache[(Math.random() *  @nextMessageNum() - 1) >> 0]
 
   buildRandomMessage: ->
-    amountOfMessages = ((Math.random() * 3) >> 0) + 2
+    amountOfMessages = ((Math.random() * 4) >> 0) + 2
 
     message = while amountOfMessages -= 1
       messageParts =  @random().message.split(" ")
@@ -41,5 +45,5 @@ module.exports = (robot) ->
     message = messages.add msg.match[1]
 
     if messages.nextMessageNum() > 100
-      if ((Math.random() * 50) >> 0) == 1
+      if ((Math.random() * 75) >> 0) == 1
         msg.send messages.buildRandomMessage()

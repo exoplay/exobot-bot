@@ -45,5 +45,5 @@ module.exports = (robot) ->
     message = messages.add msg.match[1]
 
     if messages.nextMessageNum() > 100
-      if ((Math.random() * 75) >> 0) == 1
+      if ((Math.random() * 75) >> 0) == 1 || message.indexOf("exobot: ") == 0
         msg.send messages.buildRandomMessage()

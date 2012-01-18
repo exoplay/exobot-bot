@@ -50,5 +50,5 @@ module.exports = (robot) ->
       chance /= 5
 
     if messages.nextMessageNum() > 100
-      if ((Math.random() * 75) >> 0) == 1
+      if ((Math.random() * chance) >> 0) == 1
         msg.send messages.buildRandomMessage()

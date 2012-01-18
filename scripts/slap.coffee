@@ -1,9 +1,14 @@
-# slap <name> around with a large trout 
+# slap <name> - slap <name> around 
 
 module.exports = (robot) ->
   robot.respond /slap\s(.*)/i, (msg) ->
     name = msg.match[1].trim()
-    response = '*slaps ' + name + ' around with a large trout*'
+    msg.send("*" + slap(name) + "*")
 
-    msg.send(response)
+slap = (name) ->
+  slaps[(Math.random() * slaps.length) >> 0].replace(/{name}/, name);
+
+slaps = [
+  "slaps {name} around with a large trout"
+]
 

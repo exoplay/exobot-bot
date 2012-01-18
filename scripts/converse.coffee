@@ -44,6 +44,11 @@ module.exports = (robot) ->
   robot.hear /(.*)/i, (msg) ->
     message = messages.add msg.match[1]
 
+    chance = 100
+
+    if(msg.match[1].toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
+      chance /= 5
+
     if messages.nextMessageNum() > 100
-      if ((Math.random() * 75) >> 0) == 1 || message.indexOf("exobot: ") == 0
+      if ((Math.random() * 75) >> 0) == 1
         msg.send messages.buildRandomMessage()

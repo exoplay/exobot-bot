@@ -34,7 +34,7 @@ module.exports = (robot) ->
     else
       msg.send "I don't recall that event"
 
-  robot.respond /when (was|is|did)?\s+(.*?)$/i, (msg) ->
+  robot.respond /when (was|is|did|does)?\s+(.*?)$/i, (msg) ->
     if robot.brain.data.days_since && robot.brain.data.days_since[msg.match[2]]
       date = robot.brain.data.days_since[msg.match[2]]
       days_since = Math.floor((new Date - date.getTime()) / (1000*24*60*60))

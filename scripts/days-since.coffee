@@ -5,7 +5,7 @@
 # how long since <event>? - Display the number of days since the event
 
 module.exports = (robot) ->
-  robot.respond /(.*?) was on ((19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]))/, (msg) ->
+  robot.respond /(.*?) on ((19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]))/, (msg) ->
     event = msg.match[1]
     date = new Date(msg.match[2])
     robot.brain.data.days_since ||= {}

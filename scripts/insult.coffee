@@ -9,8 +9,8 @@ insult = (name) ->
   insults[(Math.random() * insults.length) >> 0].replace(/{name}/, name);
 
 insults = [
-  "{name} is a scoundrel.",
-  "{name} should be ashamed of himself.",
-  "{name} is a motherless son of a goat.",
-  "{name} is a gravy-sucking pig."
+  "{name} is a scoundrel!",
+  "{name} should be ashamed of himself!",
+  "{name} is a motherless son of a goat!",
+  "{name} is a gravy-sucking pig!"
 ]

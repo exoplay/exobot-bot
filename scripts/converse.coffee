@@ -44,14 +44,13 @@ module.exports = (robot) ->
   robot.hear /(.*)/i, (msg) ->
     message = messages.add msg.match[1]
 
-    chance = 1
+    chance = 10
 
     if(msg.match[1].toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
       chance /= 5
 
     if messages.nextMessageNum() > 100
-      if ((Math.random() * chance) >> 0) == 1
-        msg.send messages.buildRandomMessage()
+      msg.send messages.buildRandomMessage()
 
     if msg.match[1].toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"

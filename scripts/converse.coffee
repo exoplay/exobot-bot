@@ -44,7 +44,7 @@ module.exports = (robot) ->
   robot.hear /(.*)/i, (msg) ->
     message = messages.add msg.match[1]
 
-    chance = 100
+    chance = 1
 
     if(msg.match[1].toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
       chance /= 5

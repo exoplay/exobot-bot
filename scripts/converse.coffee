@@ -24,13 +24,13 @@ class Messages
 
   all: -> @cache
 
-  random: -> @cache[(Math.random() *  @nextMessageNum() - 1) >> 0]
+  random: -> @cache[(Math.random() * (@cache.length - 1)) >> 0]
 
   buildRandomMessage: ->
     amountOfMessages = ((Math.random() * 4) >> 0) + 2
 
     message = while amountOfMessages -= 1
-      messageParts =  @random().message.split(" ")
+      messageParts = @random().message.split(" ")
       startingPoint = (Math.random() * messageParts.length) >> 0
       messageParts[startingPoint...messageParts.length].join(" ")
 

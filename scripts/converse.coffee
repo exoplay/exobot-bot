@@ -1,5 +1,5 @@
 # Allows Hubot to talk back. Passive script.
-###
+
 class Messages
   constructor: (@robot) ->
     @cache = []
@@ -53,4 +53,3 @@ module.exports = (robot) ->
 
     if msg.match[1].toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
-###

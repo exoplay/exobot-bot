@@ -48,7 +48,7 @@ module.exports = (robot) ->
       chance /= 5
 
     if messages.nextMessageNum() > 100
-      if ((Math.random() * chance) >> 0) == 1
+      if ((Math.random() * chance) >> 0) == 0
         msg.send messages.buildRandomMessage()
 
     if msg.match[1].toLowerCase() == "rebooting exobot"

@@ -20,7 +20,7 @@ class Messages
 
     @cache.push message
     @robot.brain.data.messages = @cache
-    message
+    messageText
 
   all: -> @cache
 
@@ -40,7 +40,7 @@ module.exports = (robot) ->
   messages = new Messages(robot)
 
   robot.hear /(.*)/i, (msg) ->
-    message = messages.add msg.match[1]
+    messages.add msg.match[1]
 
     chance = 1
 

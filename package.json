@@ -1,6 +1,6 @@
 {
   "name": "exobot",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Olivine Labs, LLC.",
   "keywords": "A chatbot based on hubot by Github",
   "description": "A simple helpful chatbot for Olivine Labs based on Hubot by Github",
@@ -15,7 +15,8 @@
     "url": "git@github.com:Olivine-Labs/exobot.git"
   },
   "dependencies": {
-    "hubot": "2.1.3",
+    "hubot": "2.1.4",
+    "hubot-scripts": "2.0.6",
     "optparse": "1.0.3",
     "hubot-xmpp": "0.0.5",
     "clark": "0.0.5",

@@ -16,12 +16,12 @@
   },
   "dependencies": {
     "hubot": "2.1.4",
-    "hubot-scripts": "2.0.6",
     "optparse": "1.0.3",
     "hubot-xmpp": "0.0.5",
     "clark": "0.0.5",
     "twss": "0.1.5",
     "redis": "0.7.1",
-    "sandbox": "0.8.3"
+    "sandbox": "0.8.3",
+    "node-stringprep": "0.1.4"
   }
 }

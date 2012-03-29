@@ -20,7 +20,6 @@
     "optparse": "1.0.3",
     "hubot-xmpp": "0.0.5",
     "clark": "0.0.5",
-    "twss": "0.1.5",
     "redis": "0.7.1",
     "sandbox": "0.8.3"
   }

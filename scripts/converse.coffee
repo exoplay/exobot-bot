@@ -37,6 +37,8 @@ class Messages
     message.join(" ").replace(/((\.|\!|\?)*)(?!$)/,'')
 
   retrieveLast: (amount) ->
+    if amount > 15 then amount = 15
+
     @cache[(@cache.length-amount)...(@cache.length)]
 
 module.exports = (robot) ->

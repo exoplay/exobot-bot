@@ -36,6 +36,9 @@ class Messages
 
     message.join(" ").replace(/((\.|\!|\?)*)(?!$)/,'')
 
+  retrieveLast: (amount) ->
+    @cache[(@cache.length-amount)...(@cache.length)]
+
 module.exports = (robot) ->
   messages = new Messages(robot)
 
@@ -53,3 +56,11 @@ module.exports = (robot) ->
 
     if msg.match[1].toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
+
+  robot.respond /history (.*)/i, (msg) ->
+    amount = msg.match[1].trim()
+
+    message = for i, obj of messages.retrieveLast(amount) 
+      "#{i+1}. #{obj.message}"
+
+    msg.send(message.join("\r\n"))

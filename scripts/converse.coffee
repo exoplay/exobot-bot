@@ -61,6 +61,6 @@ module.exports = (robot) ->
     amount = msg.match[1].trim()
 
     message = for i, obj of messages.retrieveLast(amount) 
-      "#{i+1}. #{obj.message}"
+      "#{i}. #{obj.message}"
 
     msg.send(message.join("\r\n"))

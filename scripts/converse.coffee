@@ -44,13 +44,23 @@ class Messages
 module.exports = (robot) ->
   messages = new Messages(robot)
 
+  chance = 100
+
+  # History command
+  robot.respond /history (.*)/i, (msg) ->
+    amount = msg.match[1].trim()
+
+    message = for i, obj of messages.retrieveLast(amount) 
+      "#{i}. #{obj.message}"
+
+    msg.send(message.join("\r\n"))
+
+  # General conversation
   robot.hear /(.*)/i, (msg) ->
-    messages.add msg.match[1]
-
-    chance = 100
-
     if(msg.match[1].toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
       chance /= 5
+
+    messages.add msg.match[1]
 
     if messages.nextMessageNum() > 100
       if ((Math.random() * chance) >> 0) == 0
@@ -59,10 +69,29 @@ module.exports = (robot) ->
     if msg.match[1].toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
 
-  robot.respond /history (.*)/i, (msg) ->
-    amount = msg.match[1].trim()
+  chance = 10
 
-    message = for i, obj of messages.retrieveLast(amount) 
-      "#{i}. #{obj.message}"
+  # OL faces
+  robot.hear /^u[m]+(.*)$/i, (msg) ->
+    if ((Math.random() * chance) >> 0) == 0
+      msg.send "http://i.imgur.com/rgkc6.png"
 
-    msg.send(message.join("\r\n"))
+  robot.hear /^(rite|right)\??$/i, (msg) ->
+    if ((Math.random() * chance) >> 0) == 0
+      msg.send "http://i.imgur.com/LKcKt.png"
+
+  robot.hear /^soon(\.*)$/i, (msg) ->
+    if ((Math.random() * chance) >> 0) == 0
+      msg.send "http://i.imgur.com/huYAB.png"
+
+  robot.hear /^not bad(\.?)$/i, (msg) ->
+    if ((Math.random() * chance) >> 0) == 0
+      msg.send "http://i.imgur.com/0COAu.png"
+
+  robot.hear /^quite(\.?)$/i, (msg) ->
+    if ((Math.random() * chance) >> 0) == 0
+      msg.send "http://i.imgur.com/0uhyH.png"
+
+  robot.hear /^wat(\.?)$/i, (msg) ->
+    if ((Math.random() * chance) >> 0) == 0
+      msg.send "http://i.imgur.com/UBhAX.png"

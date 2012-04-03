@@ -44,8 +44,6 @@ class Messages
 module.exports = (robot) ->
   messages = new Messages(robot)
 
-  chance = 100
-
   # History command
   robot.respond /history (.*)/i, (msg) ->
     amount = msg.match[1].trim()
@@ -57,6 +55,8 @@ module.exports = (robot) ->
 
   # General conversation
   robot.hear /(.*)/i, (msg) ->
+    chance = 100
+
     if(msg.match[1].toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
       chance /= 5
 
@@ -69,29 +69,33 @@ module.exports = (robot) ->
     if msg.match[1].toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
 
-  chance = 10
-
   # OL faces
   robot.hear /^u[m]+(.*)$/i, (msg) ->
+    chance = 10
     if ((Math.random() * chance) >> 0) == 0
       msg.send "http://i.imgur.com/rgkc6.png"
 
   robot.hear /^(rite|right)\??$/i, (msg) ->
+    chance = 10
     if ((Math.random() * chance) >> 0) == 0
       msg.send "http://i.imgur.com/LKcKt.png"
 
   robot.hear /^soon(\.*)$/i, (msg) ->
+    chance = 10
     if ((Math.random() * chance) >> 0) == 0
       msg.send "http://i.imgur.com/huYAB.png"
 
   robot.hear /^not bad(\.?)$/i, (msg) ->
+    chance = 10
     if ((Math.random() * chance) >> 0) == 0
       msg.send "http://i.imgur.com/0COAu.png"
 
   robot.hear /^quite(\.?)$/i, (msg) ->
+    chance = 10
     if ((Math.random() * chance) >> 0) == 0
       msg.send "http://i.imgur.com/0uhyH.png"
 
   robot.hear /^wat(\.?)$/i, (msg) ->
+    chance = 10
     if ((Math.random() * chance) >> 0) == 0
       msg.send "http://i.imgur.com/UBhAX.png"

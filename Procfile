@@ -1,1 +1,1 @@
-web: bin/hubot -s -a xmpp -n exobot
+app: bin/hubot -s -a xmpp -n exobot

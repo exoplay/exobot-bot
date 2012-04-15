@@ -15,12 +15,16 @@
     "url": "git@github.com:Olivine-Labs/exobot.git"
   },
   "dependencies": {
-    "hubot": "2.1.2",
+    "hubot": "2.1.4",
     "hubot-scripts": "2.0.6",
     "optparse": "1.0.3",
     "hubot-xmpp": "0.0.5",
     "clark": "0.0.5",
     "redis": "0.6.7",
     "sandbox": "0.8.3"
+  },
+  "engines": {
+    "node": "0.6.x",
+    "npm":  "1.1.x"
   }
 }

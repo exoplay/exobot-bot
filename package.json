@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "hubot": "2.1.4",
-    "hubot-scripts": "2.0.6",
+    "hubot-scripts": "2.0.8",
     "optparse": "1.0.3",
     "hubot-xmpp": "0.0.5",
     "clark": "0.0.5",

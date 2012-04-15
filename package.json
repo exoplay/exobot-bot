@@ -22,8 +22,5 @@
     "clark": "0.0.5",
     "redis": "0.7.1",
     "sandbox": "0.8.3"
-  },
-  "engines": {
-    "node": "0.6.x"
   }
 }

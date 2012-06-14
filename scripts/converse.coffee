@@ -1,4 +1,5 @@
 # Allows Hubot to talk back. Passive script.
+cleverbot = require('cleverbot-node')
 
 class Messages
   constructor: (@robot) ->
@@ -43,6 +44,7 @@ class Messages
 
 module.exports = (robot) ->
   messages = new Messages(robot)
+  c = new cleverbot()
 
   # History command
   robot.respond /history (.*)/i, (msg) ->
@@ -55,7 +57,7 @@ module.exports = (robot) ->
 
   # General conversation
   robot.hear /(.*)/i, (msg) ->
-    chance = 100
+    chance = 150
 
     if(msg.match[1].toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
       chance /= 5
@@ -68,6 +70,10 @@ module.exports = (robot) ->
 
     if msg.match[1].toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
+
+    if ((Math.random() * chance) >> 0) == 1
+      data = msg.match[1].trim()
+      c.write(data, (c) => msg.send(c.message))
 
   # OL faces
   robot.hear /^u[m]+(.*)$/i, (msg) ->

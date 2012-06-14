@@ -81,7 +81,9 @@ module.exports = (robot) ->
     if incoming.toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
 
-    if messages.beClever && (Date.now() - messages.timeSinceLastCleverness > 15000)
+  robot.respond /(.*)/i, (msg) ->
+    incoming = msg.match[1].trim()
+    if messages.beClever && (Date.now() - messages.timeSinceLastCleverness > 5000)
       data = msg.match[1].trim()
       c.write(data, (c) => 
         msg.send(c.message)

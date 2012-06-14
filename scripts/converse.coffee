@@ -42,6 +42,9 @@ class Messages
 
     @cache[(@cache.length-amount)...(@cache.length)]
 
+  beClever: false
+  timeSinceLastCleverness: Date.now()
+
 module.exports = (robot) ->
   messages = new Messages(robot)
   c = new cleverbot()
@@ -55,11 +58,18 @@ module.exports = (robot) ->
 
     msg.send(message.join("\r\n"))
 
+  # History command
+  robot.respond /be clever/i, (msg) ->
+    messages.beClever = !messages.beClever
+    msg.send "Cleverness: #{messages.beClever}"
+
+
   # General conversation
   robot.hear /(.*)/i, (msg) ->
-    chance = 150
+    incoming = msg.match[1].trim()
+    chance = 100
 
-    if(msg.match[1].toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
+    if(incoming.toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
       chance /= 5
 
     messages.add msg.match[1]
@@ -68,12 +78,15 @@ module.exports = (robot) ->
       if ((Math.random() * chance) >> 0) == 0
         msg.send messages.buildRandomMessage()
 
-    if msg.match[1].toLowerCase() == "rebooting exobot"
+    if incoming.toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
 
-    if ((Math.random() * chance) >> 0) == 1
+    if messages.beClever && (Date.now() - messages.timeSinceLastCleverness > 15000)
       data = msg.match[1].trim()
-      c.write(data, (c) => msg.send(c.message))
+      c.write(data, (c) => 
+        msg.send(c.message)
+        messages.timeSinceLastCleverness = Date.now()
+      )
 
   # OL faces
   robot.hear /^u[m]+(.*)$/i, (msg) ->

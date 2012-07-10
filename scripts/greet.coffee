@@ -2,7 +2,8 @@ greets = [
   "Hey",
   "Hi",
   "Hello",
-  "Yo"
+  "Yo",
+  "Sup"
 ]
 
 module.exports = (robot) ->

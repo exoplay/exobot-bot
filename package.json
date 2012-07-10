@@ -17,7 +17,7 @@
   "dependencies": {
     "hubot": "https://github.com/github/hubot/tarball/v2.3.0",
     "optparse": "1.0.3",
-    "hubot-xmpp": "0.0.6",
+    "hubot-xmpp": "https://github.com/ajacksified/hubot-xmpp/tarball/v0.0.7",
     "clark": "0.0.5",
     "redis": "0.7.2",
     "sandbox": "0.8.3",

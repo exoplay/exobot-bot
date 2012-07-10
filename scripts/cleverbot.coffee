@@ -1,4 +1,17 @@
-# cleverbot - now twice as clever
+# Description:
+#   Makes your Hubot even more Clever™
+#
+# Dependencies:
+#   cleverbot-node: 0.1.1
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   hubot c <input>
+#
+# Authors:
+#   ajacksified
 
 cleverbot = require('cleverbot-node')
 

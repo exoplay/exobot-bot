@@ -4,6 +4,11 @@ querystring = require('querystring')
 module.exports = (robot) ->
   robot.router.get "/hubot/say", (req, res) ->
     query = querystring.parse(req._parsedUrl.query)
-    robot.send({ room: query.room, type: query.type || 'groupchat' }, query.message)
+
+    user = {}
+    user.room = query.room if query.room
+    user.type = query.type if query.type
+
+    robot.send(user, query.message)
 
     res.end "Said #{query.message}"

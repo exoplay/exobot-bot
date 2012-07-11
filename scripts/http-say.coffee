@@ -1,4 +1,18 @@
-spawn = require('child_process').spawn
+# Description:
+#   "Simple path to have Hubot echo out anything in the message querystring for a given room."
+#
+# Dependencies:
+#   "querystring": "0.1.0"
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   GET /hubot/say?message=<message>[&room=<room>&type=<type]
+#
+# Authors:
+#   ajacksified
+
 querystring = require('querystring')
 
 module.exports = (robot) ->

@@ -24,6 +24,7 @@ module.exports = (robot) ->
           'http://code.jquery.com/jquery-1.7.2.min.js'
         ]
         done: (errors, window) ->
-          $ = window.$
-          msg.send "#{$('title').text()}\n#{$('meta[name=description]').attr("content")}"
+          unless errors
+            $ = window.$
+            msg.send "#{$('title').text()}\n#{$('meta[name=description]').attr("content")}"
       )

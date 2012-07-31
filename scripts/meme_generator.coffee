@@ -21,7 +21,14 @@
 #
 # Yo dawg <text> so <text> - Generates Yo Dawg
 #
-# AWESOME ANDREW <text>  - Generates Awesome Andrew
+# One does not simply <text> - Generates "one does not simply" 
+#
+# Scumbag <name> <text> - Generates Scumbag Steve
+#
+# What if I told you <text> - Generates Morpheus
+#
+# Prepare yourself <text> - Generates Ned
+
 
 
 
@@ -66,6 +73,22 @@ module.exports = (robot) ->
 
   robot.respond /(YO DAWG .*) (SO .*)/i, (msg) ->
     memeGenerator msg, 79, 108785, msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(ONE DOES NOT SIMPLY) (.*)/i, (msg) ->
+    memeGenerator msg, 689854, 3291562, msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(SCUMBAG .*) (.*)/i, (msg) ->
+    memeGenerator msg, 142, 366130, msg.match[2], "", (url) ->
+      msg.send url
+
+  robot.respond /(WHAT IF I TOLD YOU) (.*)/i, (msg) ->
+    memeGenerator msg, 1118843, 4796874, msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(PREPARE YOURSELF[,.!]?) (.*)/i, (msg) ->
+    memeGenerator msg, 414926, 2295701, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
 memeGenerator = (msg, generatorID, imageID, text0, text1, callback) ->

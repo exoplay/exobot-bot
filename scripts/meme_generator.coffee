@@ -79,7 +79,7 @@ module.exports = (robot) ->
     memeGenerator msg, 689854, 3291562, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(SCUMBAG .*) (.*)/i, (msg) ->
+  robot.respond /(SCUMBAG\s\w*) (.*)/i, (msg) ->
     memeGenerator msg, 142, 366130, msg.match[2], "", (url) ->
       msg.send url
 

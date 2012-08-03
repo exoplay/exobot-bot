@@ -28,6 +28,9 @@
 # What if I told you <text> - Generates Morpheus
 #
 # Prepare yourself <text> - Generates Ned
+#
+# Oh robot.name <text> - Generates Meme Dad
+
 
 
 
@@ -89,6 +92,10 @@ module.exports = (robot) ->
 
   robot.respond /(PREPARE YOURSELF[,.!]?) (.*)/i, (msg) ->
     memeGenerator msg, 414926, 2295701, msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(OH EXOBOT[,.!]?) (.*)/i, (msg) ->
+    memeGenerator msg, 1128592, 4831367, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
 memeGenerator = (msg, generatorID, imageID, text0, text1, callback) ->

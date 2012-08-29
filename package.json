@@ -15,12 +15,11 @@
     "url": "git@github.com:Olivine-Labs/exobot.git"
   },
   "dependencies": {
-    "hubot": "https://github.com/github/hubot/tarball/v2.3.0",
+    "hubot": "2.3.2",
     "optparse": "1.0.3",
-    "hubot-xmpp": "https://github.com/ajacksified/hubot-xmpp/tarball/v0.0.7",
+    "hubot-xmpp": "0.1.0",
     "clark": "0.0.5",
     "redis": "0.7.2",
-    "sandbox": "0.8.3",
     "cleverbot-node": "0.1.1",
     "querystring": "0.1.0",
     "jsdom": "0.2.15"

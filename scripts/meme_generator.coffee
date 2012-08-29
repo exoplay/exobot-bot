@@ -98,7 +98,7 @@ module.exports = (robot) ->
     memeGenerator msg, 1128592, 4831367, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(BILL GATES|WINDOWS) (.*)/i
+  robot.respond /(BILL GATES|WINDOWS) (.*)/i, (msg) ->
     memeGenerator msg, 1508045, 6221098, msg.match[1], msg.match[2], (url) ->
       msg.send url
 

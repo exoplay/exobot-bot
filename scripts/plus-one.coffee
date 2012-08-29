@@ -36,7 +36,7 @@ module.exports = (robot) ->
   scoreKeeper = new ScoreKeeper(robot)
 
   robot.hear /(.+)(\+\+)/i, (msg) ->
-    name = msg.match[1].trim()
+    name = msg.match[1].trim().toLowerCase()
 
     if name != msg.message.user.name.toLowerCase()
       newScore = scoreKeeper.add(name)

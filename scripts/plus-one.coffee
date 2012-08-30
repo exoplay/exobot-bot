@@ -38,14 +38,14 @@ module.exports = (robot) ->
   robot.hear /([\w\s]+)([\W\S]*)?(\+\+)$/i, (msg) ->
     name = msg.match[1].trim().toLowerCase()
 
-    if name != msg.message.user.name.toLowerCase()
+    if name != "" and  name != msg.message.user.name.toLowerCase()
       newScore = scoreKeeper.add(name)
       msg.send "#{name} has #{newScore} points."
 
   robot.hear /([\w\s]+)([\W\S]*)?(\-\-)$/i, (msg) ->
     name = msg.match[1].trim().toLowerCase()
 
-    if name != msg.message.user.name.toLowerCase()
+    if name != "" and name != msg.message.user.name.toLowerCase()
       newScore = scoreKeeper.subtract(name)
       msg.send "#{name} has #{newScore} points."
 

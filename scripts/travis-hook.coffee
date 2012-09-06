@@ -16,9 +16,11 @@ module.exports = (robot) ->
   robot.router.post "/hubot/travis", (req, res) ->
     data = req.body
 
+    console.log req.body
+
     message = "
     -----------------\n
-    #{data.status_message} - #{data.repository.name}\n
+    #{data.status_message.toUpperCase()} <#{data.repository.name}> [#{data.commit}]\n
     Compare: #{data.compare_url}\n
     Committed by #{data.committer_name} at #{data.committed_at}\n
     -----------------"

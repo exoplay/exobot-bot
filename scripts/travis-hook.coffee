@@ -14,9 +14,13 @@ querystring = require('querystring')
 
 module.exports = (robot) ->
   robot.router.post "/hubot/travis", (req, res) ->
-    data = req.body
+    query = querystring.parse url.parse(req.url).query
 
-    console.log req.body
+    res.end JSON.stringify {
+       received: true #some client have problems with and empty response
+    }
+
+    data = JSON.parse req.body.payload
 
     message = "
     -----------------\n

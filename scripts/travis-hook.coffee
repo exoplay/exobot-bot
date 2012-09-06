@@ -11,7 +11,7 @@
 #   ajacksified
 
 querystring = require('querystring')
-querystring = require('querystring')
+url = require('url')
 
 module.exports = (robot) ->
   robot.router.post "/hubot/travis", (req, res) ->

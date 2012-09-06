@@ -26,17 +26,18 @@ module.exports = (robot) ->
 
     data = JSON.parse req.body.payload
 
+    build_environments = [
+      "1": "Lua",
+      "2": "Luajit"
+    ]
+
     message = "
     -----------------\n
-    #{data.status_message.toUpperCase()} <#{data.repository.name}> [#{data.commit}]\n
+    #{data.status_message.toUpperCase()} on #{build_environments[data.matrix.number.split(".")[1]]} <#{data.repository.name}> [#{data.commit}]\n
     Compare: #{data.compare_url}\n
     Committed by #{data.committer_name} at #{data.committed_at}\n
     -----------------"
 
-    user = {}
-    user.room = query.room if query.room
-    user.type = query.type if query.type
+    console.log message
 
     robot.send(user, message)
-
-    res.end "Said #{query.message}"

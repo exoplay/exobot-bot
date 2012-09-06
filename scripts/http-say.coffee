@@ -25,4 +25,7 @@ module.exports = (robot) ->
 
     robot.send(user, query.message)
 
+    console.log message
+    console.log user
+
     res.end "Said #{query.message}"

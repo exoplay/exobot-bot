@@ -11,15 +11,13 @@
 #   ajacksified
 
 querystring = require('querystring')
-url = require('url')
 
 module.exports = (robot) ->
   robot.router.post "/hubot/travis", (req, res) ->
     query = querystring.parse(req._parsedUrl.query)
 
-    user = {}
-    user.room = query.room if query.room
-    user.type = query.type if query.type
+    user =
+      room: query.room || "ol-dev@conference.talk.exoplay.net"
 
     data = req.body
 
@@ -34,6 +32,5 @@ module.exports = (robot) ->
     Committed by #{data.committer_name} at #{data.committed_at}\n
     -----------------"
 
+    res.end "Said #{message}"
     robot.send(user, message)
-
-    res.end message

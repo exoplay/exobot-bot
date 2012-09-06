@@ -23,9 +23,8 @@ module.exports = (robot) ->
     user.room = query.room if query.room
     user.type = query.type if query.type
 
-    robot.send(user, query.message)
-
-    console.log message
     console.log user
+    console.log query
 
     res.end "Said #{query.message}"
+    robot.send(user, query.message)

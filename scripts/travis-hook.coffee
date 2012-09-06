@@ -20,8 +20,8 @@ module.exports = (robot) ->
     user =
       room: query.room || "ol-dev@conference.talk.exoplay.net"
 
-    data = req.body
-    robot.logger.info util.inspect(req.body)
+    robot.logger.info util.inspect(JSON.parse(req.body.payload))
+    data = JSON.parse(req.body.payload)
 
     build_environments =
        1: "Lua",

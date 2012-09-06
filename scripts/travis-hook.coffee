@@ -11,6 +11,7 @@
 #   ajacksified
 
 querystring = require('querystring')
+util    = require 'util'
 
 module.exports = (robot) ->
   robot.router.post "/hubot/travis", (req, res) ->
@@ -20,7 +21,7 @@ module.exports = (robot) ->
       room: query.room || "ol-dev@conference.talk.exoplay.net"
 
     data = req.body
-    @robot.logger.info req.body
+    robot.logger.info util.inspect(req.body)
 
     build_environments =
        1: "Lua",

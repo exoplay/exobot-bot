@@ -16,15 +16,20 @@ url = require('url')
 module.exports = (robot) ->
   robot.router.post "/hubot/travis", (req, res) ->
     query = querystring.parse url.parse(req.url).query
-    res.end JSON.stringify {
-       received: true #some client have problems with and empty response
-    }
+
+    console.log "got request"
 
     user = {}
     user.room = query.room if query.room
     user.type = query.type if query.type
 
+    console.log "got user"
+
+    console.log req.body.payload
+
     data = JSON.parse req.body.payload
+
+    console.log "got data"
 
     build_environments = [
       "1": "Lua",
@@ -41,3 +46,5 @@ module.exports = (robot) ->
     console.log message
 
     robot.send(user, message)
+
+    res.end message

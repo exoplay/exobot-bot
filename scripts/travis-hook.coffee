@@ -20,6 +20,7 @@ module.exports = (robot) ->
       room: query.room || "ol-dev@conference.talk.exoplay.net"
 
     data = req.body
+    @robot.logger.info req.body
 
     build_environments =
        1: "Lua",

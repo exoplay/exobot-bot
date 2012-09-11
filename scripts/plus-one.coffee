@@ -1,6 +1,3 @@
-# Allows Hubot to talk back. Passive script.
-cleverbot = require('cleverbot-node')
-
 class ScoreKeeper
   constructor: (@robot) ->
     @cache = { scoreLog: {}, scores: {} }
@@ -14,8 +11,11 @@ class ScoreKeeper
     user
 
   saveUser: (user, from) ->
-    @robot.brain.data.scores = @cache
     @saveScoreLog(user, from)
+
+    @robot.brain.data.scores[user] = @cache.scores[user]
+    @robot.brain.data.scoreLog[user] = @cache.scoreLog[user]
+
     @cache.scores[user]
 
   add: (user, from) ->
@@ -37,17 +37,24 @@ class ScoreKeeper
     @cache.scores[user]
 
   saveScoreLog: (user, from) ->
-    unless @cache.scoreLog[from] then @cache.scoreLog[from] = {}
+    @cache.scoreLog[from] ||= {}
 
     @cache.scoreLog[from][user] = new Date()
 
   isSpam: (user, from) ->
-    unless @cache.scoreLog[from] then @cache.scoreLog[from] = {}
+    @cache.scoreLog[from] ||= {}
 
     if !@cache.scoreLog[from][user]
       return false
 
-    @cache.scoreLog[from][user].setMinutes(@cache.scoreLog[from][user].getMinutes() + 5) > new Date()
+    dateSubmitted = new Date(@cache.scoreLog[from][user])
+
+    messageIsSpam = dateSubmitted.setMinutes(dateSubmitted.getMinutes() + 5) > new Date()
+
+    if !messageIsSpam
+      delete @cache.scoreLog[from][user] #clean it up
+
+    messageIsSpam
 
   validate: (user, from) ->
     user != from && user != "" && !@isSpam(user, from)
@@ -59,7 +66,7 @@ module.exports = (robot) ->
     name = msg.match[1].trim().toLowerCase()
     from = msg.message.user.name.toLowerCase()
 
-    newScore = scoreKeeper.add(name)
+    newScore = scoreKeeper.add(name, from)
 
     if newScore? then msg.send "#{name} has #{newScore} points."
 
@@ -67,7 +74,7 @@ module.exports = (robot) ->
     name = msg.match[1].trim().toLowerCase()
     from = msg.message.user.name.toLowerCase()
 
-    newScore = scoreKeeper.subtract(name)
+    newScore = scoreKeeper.subtract(name, from)
     if newScore? then msg.send "#{name} has #{newScore} points."
 
   robot.respond /score (for\s)?(.*)/i, (msg) ->
@@ -75,3 +82,5 @@ module.exports = (robot) ->
     score = scoreKeeper.scoreForUser(name)
 
     msg.send "#{name} has #{score} points."
+
+

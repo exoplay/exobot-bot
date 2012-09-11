@@ -3,17 +3,18 @@ class ScoreKeeper
     @cache = { scoreLog: {}, scores: {} }
 
     @robot.brain.on 'loaded', =>
-      if @robot.brain.data.scores and @robot.brain.data.scoreLog
-        @cache.scores = @robot.brain.data.scores || {}
-        @cache.scoreLog = @robot.brain.data.scoreLog || {}
+      @robot.brain.data.scoreLog ||= {}
+      @robot.brain.data.scores ||= {}
+
+      @cache.scores = @robot.brain.data.scores || {}
+      @cache.scoreLog = @robot.brain.data.scoreLog || {}
 
   getUser: (user) ->
-    if not @cache.scores[user] then @cache.scores[user] = 0
+    @cache.scores[user] ||= 0
     user
 
   saveUser: (user, from) ->
     @saveScoreLog(user, from)
-
     @robot.brain.data.scores[user] = @cache.scores[user]
     @robot.brain.data.scoreLog[user] = @cache.scoreLog[user]
 
@@ -31,15 +32,12 @@ class ScoreKeeper
       @cache.scores[user]--
       @saveUser(user, from)
 
-  all: -> @cache
-
   scoreForUser: (user) -> 
     user = @getUser(user)
     @cache.scores[user]
 
   saveScoreLog: (user, from) ->
     @cache.scoreLog[from] ||= {}
-
     @cache.scoreLog[from][user] = new Date()
 
   isSpam: (user, from) ->
@@ -48,7 +46,7 @@ class ScoreKeeper
     if !@cache.scoreLog[from][user]
       return false
 
-    dateSubmitted = new Date(@cache.scoreLog[from][user])
+    dateSubmitted = @cache.scoreLog[from][user]
 
     messageIsSpam = dateSubmitted.setMinutes(dateSubmitted.getMinutes() + 5) > new Date()
 
@@ -61,6 +59,7 @@ class ScoreKeeper
     user != from && user != "" && !@isSpam(user, from)
 
 module.exports = (robot) ->
+
   scoreKeeper = new ScoreKeeper(robot)
 
   robot.hear /([\w\s]+)([\W\S]*)?(\+\+)$/i, (msg) ->

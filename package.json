@@ -22,7 +22,8 @@
     "redis": "0.7.2",
     "cleverbot-node": "0.1.1",
     "querystring": "0.1.0",
-    "jsdom": "0.2.15"
+    "jsdom": "0.2.15",
+    "yelp": "0.1.1"
   },
   "engines": {
     "node": ">= 0.8.7",

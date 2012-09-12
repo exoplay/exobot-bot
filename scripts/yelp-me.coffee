@@ -1,3 +1,25 @@
+# Description
+#   Searches Yelp API to find you things.
+#
+# Dependencies:
+#   "yelp": "0.1.1"
+#
+# Configuration:
+#   HUBOT_YELP_CONSUMER_KEY=key 
+#   HUBOT_YELP_CONSUMER_SECRET=secret 
+#   HUBOT_YELP_TOKEN=token 
+#   HUBOT_YELP_TOKEN_SECRET=token_secret
+#
+# Commands:
+#   hubot <yelp me [thing] near [location]> - performs yelp query. yelp me lunch in san francisco
+#
+# Notes:
+#   Sign up for a Yelp token and add configuration.
+#   http://www.yelp.com/developers/getting_started/api_access
+#
+# Author:
+#   ajacksified
+
 yelp = require("yelp").createClient(
   consumer_key: process.env.HUBOT_YELP_CONSUMER_KEY
   consumer_secret: process.env.HUBOT_YELP_CONSUMER_SECRET

@@ -21,5 +21,5 @@ bro = ["broski",
 
 
 module.exports = (robot) ->
-  robot.hear /cool story bro/i, (msg) ->
+  robot.hear /cool[\s+]story[\s+]bro/i, (msg) ->
     msg.send(cool[(Math.random() * cool.length) >> 0] + " " + story[(Math.random() * story.length) >> 0] + " " + bro[(Math.random() * bro.length) >> 0])

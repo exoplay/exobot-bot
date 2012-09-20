@@ -58,6 +58,17 @@ class ScoreKeeper
   validate: (user, from) ->
     user != from && user != "" && !@isSpam(user, from)
 
+  length: () ->
+    @cache.scoreLog.length
+
+  top: (amount) ->
+    tops = []
+
+    for name, score of @cache.scores
+      tops.push(name: name, score: score)
+
+    tops.sort((a,b) -> b.score - a.score).slice(0,amount)
+
 module.exports = (robot) ->
 
   scoreKeeper = new ScoreKeeper(robot)
@@ -83,4 +94,16 @@ module.exports = (robot) ->
 
     msg.send "#{name} has #{score} points."
 
+  robot.respond /top (\d+)/i, (msg) ->
+    amount = msg.match[1] >> 0
 
+    tops = scoreKeeper.top(amount)
+
+    message = "\n``````````````````\nTOP #{tops.length}:\n"
+
+    for i in [0..tops.length-1]
+      message += "#{i+1}. #{tops[i].name} : #{tops[i].score}\n"
+
+    message += "``````````````````"
+
+    msg.send message

@@ -23,7 +23,7 @@ module.exports = (robot) ->
     robot.logger.info util.inspect(JSON.parse(req.body.payload))
     data = JSON.parse(req.body.payload)
 
-   message = "
+    message = "
     -----------------\n
     #{data.status_message.toUpperCase()} <#{data.repository.name}> [#{data.commit}]\n
     Compare: #{data.compare_url}\n

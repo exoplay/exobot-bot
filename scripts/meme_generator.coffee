@@ -36,6 +36,13 @@
 
 
 module.exports = (robot) ->
+  nerdSays = (name, imageID, gif) ->
+    regexStr = "(?:THE )*(?:(?:#{name[0]}[^ ]+ )?#{name} SAYS) (.+)(?:\\s?(?:\\/|,)\\s?)(.+)"
+    robot.hear new RegExp(regexStr,  'i'), (msg) ->
+      imgPath = "#{imageID}.#{if gif? then "gif" else "jpg"}"
+      shittyNerdMemeGen msg, imgPath, msg.match[1], msg.match[2], (url) ->
+        msg.send url
+
   robot.respond /Y U NO (.+)/i, (msg) ->
     caption = msg.match[1] || ""
 
@@ -101,6 +108,26 @@ module.exports = (robot) ->
   robot.respond /(BILL GATES|WINDOWS) (.*)/i, (msg) ->
     memeGenerator msg, 1508045, 6221098, msg.match[1], msg.match[2], (url) ->
       msg.send url
+
+  nerdSays "DREW", "http://i.imgur.com/LKcKt.png"
+  nerdSays "JACK", "http://i.imgur.com/0uhyH.png"
+  nerdSays "CURT", "http://i.imgur.com/UBhAX.png"
+  nerdSays "DAVE", "http://i.imgur.com/rgkc6.png"
+  nerdSays "NEFLARIA", "http://www.neflaria.com/images/skeleton1.png"
+
+QS = require "querystring"
+shittyNerdMemeGen = (msg, img_path, top_text, bottom_text, callback) ->
+  data =
+    url: img_path,
+    top: top_text,
+    bottom: bottom_text
+  msg.http('http://lit-fjord-1022.herokuapp.com/gen')
+    .post(QS.stringify(data)) (err, res, body) ->
+      result = JSON.parse(body)['url']
+      if result?
+        callback result
+      else
+        msg.reply "I'm sorry Dave, I can't generate that image."
 
 memeGenerator = (msg, generatorID, imageID, text0, text1, callback) ->
   username = process.env.HUBOT_MEMEGEN_USERNAME

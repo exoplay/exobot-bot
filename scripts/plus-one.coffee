@@ -48,7 +48,8 @@ class ScoreKeeper
 
     dateSubmitted = @cache.scoreLog[from][user]
 
-    messageIsSpam = dateSubmitted.setMinutes(dateSubmitted.getMinutes() + 5) > new Date()
+    date = new Date(dateSubmitted)
+    messageIsSpam = date.setMinutes(date.getMinutes() + 5) > new Date()
 
     if !messageIsSpam
       delete @cache.scoreLog[from][user] #clean it up
@@ -70,7 +71,6 @@ class ScoreKeeper
     tops.sort((a,b) -> b.score - a.score).slice(0,amount)
 
 module.exports = (robot) ->
-
   scoreKeeper = new ScoreKeeper(robot)
 
   robot.hear /([\w\s]+)([\W\S]*)?(\+\+)$/i, (msg) ->

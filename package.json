@@ -1,6 +1,6 @@
 {
   "name": "exobot",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "Olivine Labs, LLC.",
   "keywords": "A chatbot for Olivine Labs",
   "description": "A simple helpful chatbot for Olivine Labs",
@@ -15,19 +15,19 @@
     "url": "git@github.com:Olivine-Labs/exobot.git"
   },
   "dependencies": {
-    "hubot": "2.3.2",
+    "hubot": "2.3.4",
     "optparse": "1.0.3",
     "hubot-xmpp": "0.1.0",
     "clark": "0.0.5",
-    "redis": "0.7.2",
+    "redis": "0.8.1",
     "cleverbot-node": "0.1.1",
     "querystring": "0.1.0",
     "jsdom": "0.2.15",
     "yelp": "0.1.1"
   },
   "engines": {
-    "node": ">= 0.8.7",
-    "npm":  ">= 1.1.49"
+    "node": ">= 0.8.11",
+    "npm":  ">= 1.1.62"
   }
 }
 

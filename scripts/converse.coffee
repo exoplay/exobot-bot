@@ -48,12 +48,7 @@ class Messages
 module.exports = (robot) ->
   messages = new Messages(robot)
   c = new cleverbot()
-
-  initiate = (msg) ->
-    c.write(messages.buildRandomMessage(), (c) => 
-      msg.send(c.message)
-      messages.timeSinceLastCleverness = Date.now()
-    )
+  initiateTimeout = null
 
   # History command
   robot.respond /history (.*)/i, (msg) ->
@@ -87,7 +82,10 @@ module.exports = (robot) ->
     if incoming.toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
 
-    setTimeout(-> initiate(msg), (1000 * 60 * 10))
+    if initiateTimeout?
+      clearTimeout(initiateTimeout)
+
+    initiateTimeout = setTimeout((() -> msg.send(messages.buildRandomMessage())), (1000 * 60 * 60)) # if it's quiet, start talking once an hour
 
   robot.respond /(.*)/i, (msg) ->
     incoming = msg.match[1].trim()

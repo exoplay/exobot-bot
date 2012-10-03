@@ -49,6 +49,12 @@ module.exports = (robot) ->
   messages = new Messages(robot)
   c = new cleverbot()
 
+  initiate = (msg) ->
+    c.write(messages.buildRandomMessage(), (c) => 
+      msg.send(c.message)
+      messages.timeSinceLastCleverness = Date.now()
+    )
+
   # History command
   robot.respond /history (.*)/i, (msg) ->
     amount = msg.match[1].trim()
@@ -80,6 +86,8 @@ module.exports = (robot) ->
 
     if incoming.toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
+
+    setTimeout(-> initiate(msg), (1000 * 60 * 10))
 
   robot.respond /(.*)/i, (msg) ->
     incoming = msg.match[1].trim()
@@ -120,3 +128,4 @@ module.exports = (robot) ->
     chance = 10
     if ((Math.random() * chance) >> 0) == 0
       msg.send "http://i.imgur.com/UBhAX.png"
+

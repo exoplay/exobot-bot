@@ -12,8 +12,5 @@ module.exports = (robot) ->
   robot.hear regexp, (msg) ->
     msg.send(greet(msg.message.user.name))
 
-  robot.enter (msg) ->
-    msg.send(greet(msg.message.user.name))
-
 greet = (name) ->
   greets[(Math.random() * greets.length) >> 0] + ", " + name;

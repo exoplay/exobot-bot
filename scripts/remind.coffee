@@ -33,12 +33,19 @@ class Reminders
       if @cache.length > 0
         trigger = =>
           reminder = @removeFirst()
-          @robot.send reminder.for, reminder.for.name + ', you asked me to remind you to ' + reminder.action
+          youstr = "you"
+
+          if reminder.for.name != reminder.from.name
+            youstr = reminder.from.name
+
+          @robot.send reminder.for, "#{reminder.for.name}, #{youstr} asked me to remind you to #{reminder.action}"
           @queue()
         @current_timeout = setTimeout trigger, @cache[0].due - now
 
 class Reminder
-  constructor: (@for, @time, @action) ->
+  constructor: (@for, @from, @time, @action) ->
+    console.log @for
+
     @time.replace(/^\s+|\s+$/g, '')
 
     periods =
@@ -74,10 +81,21 @@ module.exports = (robot) ->
 
   reminders = new Reminders robot
 
-  robot.respond /remind me in ((?:(?:\d+) (?:weeks?|days?|hours?|hrs?|minutes?|mins?|seconds?|secs?)[ ,]*(?:and)? +)+)to (.*)/i, (msg) ->
-    time = msg.match[1]
-    action = msg.match[2]
-    reminder = new Reminder msg.message.user, time, action
+  robot.respond /remind (.*) in ((?:(?:\d+) (?:weeks?|days?|hours?|hrs?|minutes?|mins?|seconds?|secs?)[ ,]*(?:and)? +)+)to (.*)/i, (msg) ->
+    target = { name: msg.match[1], room: msg.message.user.room }
+    you = msg.message.user
+
+    targetstr = target.name
+
+    time = msg.match[2]
+    action = msg.match[3]
+
+    if target.name == "me"
+      target = msg.message.user
+      targetstr = "you"
+
+    reminder = new Reminder target, you, time, action
     reminders.add reminder
-    msg.send 'I\'ll remind you to ' + action + ' on ' + reminder.dueDate()
+
+    msg.send "I'll remind #{targetstr} to #{action} on #{reminder.dueDate()}"
 

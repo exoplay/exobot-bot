@@ -90,7 +90,7 @@ module.exports = (robot) ->
     time = msg.match[2]
     action = msg.match[3]
 
-    if target.name == "me"
+    if target.name == "me" || target.name == you.name
       target = msg.message.user
       targetstr = "you"
 

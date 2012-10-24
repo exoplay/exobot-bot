@@ -44,41 +44,45 @@ class Reminders
 
 class Reminder
   constructor: (@for, @from, @time, @action) ->
-    console.log @for
+    if typeof(@time) == "string"
+      @time.replace(/^\s+|\s+$/g, '')
 
-    @time.replace(/^\s+|\s+$/g, '')
+      periods =
+        weeks:
+          value: 0
+          regex: "weeks?"
+        days:
+          value: 0
+          regex: "days?"
+        hours:
+          value: 0
+          regex: "hours?|hrs?"
+        minutes:
+          value: 0
+          regex: "minutes?|mins?"
+        seconds:
+          value: 0
+          regex: "seconds?|secs?"
 
-    periods =
-      weeks:
-        value: 0
-        regex: "weeks?"
-      days:
-        value: 0
-        regex: "days?"
-      hours:
-        value: 0
-        regex: "hours?|hrs?"
-      minutes:
-        value: 0
-        regex: "minutes?|mins?"
-      seconds:
-        value: 0
-        regex: "seconds?|secs?"
+      for period of periods
+        pattern = new RegExp('^.*?([\\d\\.]+)\\s*(?:(?:' + periods[period].regex + ')).*$', 'i')
+        matches = pattern.exec(@time)
+        periods[period].value = parseInt(matches[1]) if matches
 
-    for period of periods
-      pattern = new RegExp('^.*?([\\d\\.]+)\\s*(?:(?:' + periods[period].regex + ')).*$', 'i')
-      matches = pattern.exec(@time)
-      periods[period].value = parseInt(matches[1]) if matches
-
-    @due = new Date().getTime()
-    @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
+      @due = new Date().getTime()
+      @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
+    else
+      @due = @time
 
   dueDate: ->
-    dueDate = new Date @due
+    if typeof @due == "string"
+      dueDate = new Date @due
+    else
+      dueDate = @due
+
     dueDate.toLocaleString()
 
 module.exports = (robot) ->
-
   reminders = new Reminders robot
 
   robot.respond /remind (.*) in ((?:(?:\d+) (?:weeks?|days?|hours?|hrs?|minutes?|mins?|seconds?|secs?)[ ,]*(?:and)? +)+)to (.*)/i, (msg) ->
@@ -95,6 +99,24 @@ module.exports = (robot) ->
       targetstr = "you"
 
     reminder = new Reminder target, you, time, action
+    reminders.add reminder
+
+    msg.send "I'll remind #{targetstr} to #{action} on #{reminder.dueDate()}"
+
+  robot.respond /remind (.*) (on|at) (.*) to (.*)/i, (msg) ->
+    target = { name: msg.match[1], room: msg.message.user.room }
+    you = msg.message.user
+
+    targetstr = target.name
+
+    time = msg.match[3]
+    action = msg.match[4]
+
+    if target.name == "me" || target.name == you.name
+      target = msg.message.user
+      targetstr = "you"
+
+    reminder = new Reminder target, you, new Date(time), action
     reminders.add reminder
 
     msg.send "I'll remind #{targetstr} to #{action} on #{reminder.dueDate()}"

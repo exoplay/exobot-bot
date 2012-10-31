@@ -30,6 +30,8 @@
 # Prepare yourself <text> - Generates Ned
 #
 # Oh robot.name <text> - Generates Meme Dad
+#
+# Am I the only one around here <text> - Generates that
 
 
 
@@ -107,6 +109,10 @@ module.exports = (robot) ->
 
   robot.respond /(BILL GATES|WINDOWS) (.*)/i, (msg) ->
     memeGenerator msg, 1508045, 6221098, msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(AM I THE ONLY ONE AROUND HERE) (.*)/i, (msg) ->
+    memeGenerator msg, 953639, 4240352, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
   nerdSays "DREW", "http://i.imgur.com/LKcKt.png"

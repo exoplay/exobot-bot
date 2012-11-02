@@ -3,8 +3,8 @@ class ScoreKeeper
     @cache = { scoreLog: {}, scores: {} }
 
     @robot.brain.on 'loaded', =>
-      @robot.brain.data.scoreLog ||= {}
       @robot.brain.data.scores ||= {}
+      @robot.brain.data.scoreLog ||= {}
 
       @cache.scores = @robot.brain.data.scores || {}
       @cache.scoreLog = @robot.brain.data.scoreLog || {}
@@ -17,6 +17,7 @@ class ScoreKeeper
     @saveScoreLog(user, from)
     @robot.brain.data.scores[user] = @cache.scores[user]
     @robot.brain.data.scoreLog[user] = @cache.scoreLog[user]
+    @robot.brain.save
 
     @cache.scores[user]
 
@@ -49,7 +50,7 @@ class ScoreKeeper
     dateSubmitted = @cache.scoreLog[from][user]
 
     date = new Date(dateSubmitted)
-    messageIsSpam = date.setMinutes(date.getMinutes() + 5) > new Date()
+    messageIsSpam = date.setSeconds(date.getSeconds() + 30) > new Date()
 
     if !messageIsSpam
       delete @cache.scoreLog[from][user] #clean it up
@@ -64,6 +65,10 @@ class ScoreKeeper
 
   top: (amount) ->
     tops = []
+
+    if @cache.scores["scoreLog"]
+      delete @cache.scores["scoreLog"]
+      delete @robot.brain.data.scores["scoreLog"]
 
     for name, score of @cache.scores
       tops.push(name: name, score: score)

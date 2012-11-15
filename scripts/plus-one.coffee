@@ -17,7 +17,7 @@ class ScoreKeeper
     @saveScoreLog(user, from)
     @robot.brain.data.scores[user] = @cache.scores[user]
     @robot.brain.data.scoreLog[user] = @cache.scoreLog[user]
-    @robot.brain.save
+    @robot.brain.save()
 
     @cache.scores[user]
 

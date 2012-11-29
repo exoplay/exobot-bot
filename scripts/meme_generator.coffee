@@ -79,15 +79,15 @@ module.exports = (robot) ->
     memeGenerator msg, 6443, 1123022, "", khanify(msg.match[1]), (url) ->
       msg.send url
 
-  robot.respond /(NOT SURE IF .*) (OR .*)/i, (msg) ->
+  robot.hear /(NOT SURE IF .*) (OR .*)/i, (msg) ->
     memeGenerator msg, 305, 84688, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(YO DAWG .*) (SO .*)/i, (msg) ->
+  robot.hear /(YO DAWG .*) (SO .*)/i, (msg) ->
     memeGenerator msg, 79, 108785, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(ONE DOES NOT SIMPLY) (.*)/i, (msg) ->
+  robot.hear /(ONE DOES NOT SIMPLY) (.*)/i, (msg) ->
     memeGenerator msg, 689854, 3291562, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
@@ -95,11 +95,11 @@ module.exports = (robot) ->
     memeGenerator msg, 142, 366130, msg.match[2], "", (url) ->
       msg.send url
 
-  robot.respond /(WHAT IF I TOLD YOU) (.*)/i, (msg) ->
+  robot.hear /(WHAT IF I TOLD YOU) (.*)/i, (msg) ->
     memeGenerator msg, 1118843, 4796874, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(PREPARE YOURSELF[,.!]?) (.*)/i, (msg) ->
+  robot.hear /(PREPARE YOURSELF[,.!]?) (.*)/i, (msg) ->
     memeGenerator msg, 414926, 2295701, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
@@ -111,9 +111,14 @@ module.exports = (robot) ->
     memeGenerator msg, 1508045, 6221098, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(AM I THE ONLY ONE AROUND HERE) (.*)/i, (msg) ->
+  robot.hear /(AM I THE ONLY ONE AROUND HERE) (.*)/i, (msg) ->
     memeGenerator msg, 953639, 4240352, msg.match[1], msg.match[2], (url) ->
       msg.send url
+
+  robot.hear /(.*) AND I'M JUST SITTING HERE (*)/i, (msg) ->
+    memeGenerator msg, 244535, 1823664, msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
 
   nerdSays "DREW", "http://i.imgur.com/LKcKt.png"
   nerdSays "BRENT", "http://i.imgur.com/KSz8M.png"

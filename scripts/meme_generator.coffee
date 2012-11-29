@@ -116,7 +116,7 @@ module.exports = (robot) ->
       msg.send url
 
   robot.hear /(.*) AND I'M JUST SITTING HERE (.*)/i, (msg) ->
-    memeGenerator msg, 244535, 1823664, msg.match[1], msg.match[2], (url) ->
+    memeGenerator msg, 244535, 1823664, msg.match[1], "and I'm just sitting here " + msg.match[2], (url) ->
       msg.send url
 
 

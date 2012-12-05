@@ -131,4 +131,3 @@ loadMarketData = (msg, itemData, location, cb) ->
         cb(parser.toJson(body, { object: true }).evec_api.marketstat.type, itemData)
       catch e
         cb()
-

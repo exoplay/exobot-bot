@@ -67,11 +67,11 @@ module.exports = (robot) ->
     memeGenerator msg, 6013, 1121885, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(.*) (\w+\sTOO DAMN .*)/i, (msg) ->
+  robot.hear /(.*) (\w+\sTOO DAMN .*)/i, (msg) ->
     memeGenerator msg, 998, 203665, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(GOOD NEWS EVERYONE[,.!]?) (.*)/i, (msg) ->
+  robot.hear /(GOOD NEWS EVERYONE[,.!]?) (.*)/i, (msg) ->
     memeGenerator msg, 1591, 112464, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
@@ -103,7 +103,7 @@ module.exports = (robot) ->
     memeGenerator msg, 414926, 2295701, msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(OH EXOBOT[,.!]?) (.*)/i, (msg) ->
+  robot.hear /^(OH EXOBOT[,.!]?) (.*)/i, (msg) ->
     memeGenerator msg, 1128592, 4831367, msg.match[1], msg.match[2], (url) ->
       msg.send url
 

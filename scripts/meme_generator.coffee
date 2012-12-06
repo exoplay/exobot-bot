@@ -32,6 +32,8 @@
 # Oh robot.name <text> - Generates Meme Dad
 #
 # Am I the only one around here <text> - Generates that
+#
+# Why don't we take all the <text> and <text> - put it over there patrick
 
 
 
@@ -117,6 +119,10 @@ module.exports = (robot) ->
 
   robot.hear /(.*) AND I'M JUST SITTING HERE (.*)/i, (msg) ->
     memeGenerator msg, 244535, 1823664, msg.match[1], "and I'm just sitting here " + msg.match[2], (url) ->
+      msg.send url
+
+  robot.hear /WHY DON'T WE TAKE ALL THE (.*)\/(.*)/i, (msg) ->
+    memeGenerator msg, 9571, 87311, "Why don't we take all the " + msg.match[1], msg.match[2], (url) ->
       msg.send url
 
 

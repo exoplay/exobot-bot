@@ -28,6 +28,9 @@ class ScoreKeeper
       @saveUser(user, from)
 
   subtract: (user, from) ->
+    if user == robot.name.toLowerCase()
+      return @add(user, from)
+
     if @validate(user, from)
       user = @getUser(user)
       @cache.scores[user]--

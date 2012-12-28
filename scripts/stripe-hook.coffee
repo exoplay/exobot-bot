@@ -20,16 +20,10 @@ module.exports = (robot) ->
     user =
       room: query.room
 
-    robot.logger.info req.body.payload
-    robot.logger.info "----^---^---^---^---^---^"
-    robot.logger.info util.inspect(JSON.parse(req.body.payload))
-
-    data = JSON.parse(req.body.payload)
-
-    if data.object.object == "charge"
+    if request.body.type == 'charge.succeeded'
       message = "
       ----STRIPE----\n
-      RECIEVED #{data.object.currency} #{parseFloat(data.object.amount/100).toFixed(2)}\n
+      RECIEVED #{equest.body.data.object.currency} #{parseFloat(equest.body.data.object.amount/100).toFixed(2)}\n
       ----STRIPE----"
 
       res.end "Said #{message}"

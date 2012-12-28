@@ -20,6 +20,10 @@ module.exports = (robot) ->
     user =
       room: query.room
 
+    robot.logger.info req.body.payload
+    robot.logger.info "----^---^---^---^---^---^"
+    robot.logger.info util.inspect(JSON.parse(req.body.payload))
+
     data = JSON.parse(req.body.payload)
 
     if data.object.object == "charge"

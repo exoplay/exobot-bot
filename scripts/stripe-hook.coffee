@@ -20,10 +20,10 @@ module.exports = (robot) ->
     user =
       room: query.room
 
-    if request.body.type == 'charge.succeeded'
+    if req.body.type == 'charge.succeeded'
       message = "
       ----STRIPE----\n
-      RECIEVED #{equest.body.data.object.currency} #{parseFloat(equest.body.data.object.amount/100).toFixed(2)}\n
+      RECIEVED #{req.body.data.object.currency} #{parseFloat(req.body.data.object.amount/100).toFixed(2)}\n
       ----STRIPE----"
 
       res.end "Said #{message}"

@@ -23,7 +23,7 @@ module.exports = (robot) ->
     if req.body.type == 'charge.succeeded'
       message = "
       ----STRIPE----\n
-      RECIEVED #{req.body.data.object.currency} #{parseFloat(req.body.data.object.amount/100).toFixed(2)}\n
+      RECIEVED #{req.body.data.object.currency} #{parseFloat(req.body.data.object.amount/100).toFixed(2)}\n (https://manage.stripe.com/payments/#{req.body.data.object.id})
       ----STRIPE----"
 
       res.end "Said #{message}"

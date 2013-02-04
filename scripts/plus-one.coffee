@@ -28,9 +28,6 @@ class ScoreKeeper
       @saveUser(user, from)
 
   subtract: (user, from) ->
-    if user == robot.name.toLowerCase()
-      return @add(user, from)
-
     if @validate(user, from)
       user = @getUser(user)
       @cache.scores[user]--
@@ -81,7 +78,7 @@ class ScoreKeeper
 module.exports = (robot) ->
   scoreKeeper = new ScoreKeeper(robot)
 
-  robot.hear /([\w\s]+)([\W\S]*)?(\+\+)$/i, (msg) ->
+  robot.hear /([\w\s:]+)([\W\S]*)?(\+\+)$/i, (msg) ->
     name = msg.match[1].trim().toLowerCase()
     from = msg.message.user.name.toLowerCase()
 
@@ -89,11 +86,12 @@ module.exports = (robot) ->
 
     if newScore? then msg.send "#{name} has #{newScore} points."
 
-  robot.hear /([\w\s]+)([\W\S]*)?(\-\-)$/i, (msg) ->
+  robot.hear /([\w\s:]+)([\W\S]*)?(\-\-)$/i, (msg) ->
     name = msg.match[1].trim().toLowerCase()
     from = msg.message.user.name.toLowerCase()
 
     newScore = scoreKeeper.subtract(name, from)
+
     if newScore? then msg.send "#{name} has #{newScore} points."
 
   robot.respond /score (for\s)?(.*)/i, (msg) ->

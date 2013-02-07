@@ -15,5 +15,5 @@ module.exports = (robot) ->
     response = "Invalid game."
 
     switch query
-      when "neflaria" then getOnlines("http://web1.neflaria.com/api/onlines.php", "Neflaria", msg)
+      when "neflaria" then getOnlines("https://www.neflaria.com/api/onlines.php", "Neflaria", msg)
 

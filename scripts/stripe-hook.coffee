@@ -21,10 +21,6 @@ module.exports = (robot) ->
       room: query.room
 
     if req.body.type == 'charge.succeeded'
-      message = "
-      ----STRIPE----\n
-      RECIEVED #{req.body.data.object.currency} #{parseFloat(req.body.data.object.amount/100).toFixed(2)}\n (https://manage.stripe.com/payments/#{req.body.data.object.id})
-      ----STRIPE----"
-
+      message = "----STRIPE----\nRECIEVED #{req.body.data.object.currency} #{parseFloat(req.body.data.object.amount/100).toFixed(2)}\n(https://manage.stripe.com/payments/#{req.body.data.object.id})\n----STRIPE----"
       res.end "Said #{message}"
       robot.send(user, message)

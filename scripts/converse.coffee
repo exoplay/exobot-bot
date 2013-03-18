@@ -5,7 +5,7 @@ class Messages
   constructor: (@robot) ->
     @cache = []
     @robot.brain.on 'loaded', =>
-      if @robot.brain.data.messages
+      if @robot.brain.data?.messages
         @cache = @robot.brain.data.messages
 
   nextMessageNum: ->

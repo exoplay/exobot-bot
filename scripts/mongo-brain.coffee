@@ -20,8 +20,6 @@
 # Author:
 #   ajacksified
 
-# mongodb://heroku_app1807065:a3jvp5a7s80rvdi8oqhkbe5ti6@ds047107.mongolab.com:47107/heroku_app1807065
-
 mongodb = require "mongodb"
 Server = mongodb.Server
 Collection = mongodb.Collection
@@ -46,17 +44,18 @@ module.exports = (robot) ->
       collection = new Collection(client, 'hubot_storage')
 
       collection.find().limit(1).toArray((err, results) ->
-        if results
-          robot.brain.data = results[0]
-          robot.brain.emit 'loaded', results[0]
+        if results?.length > 0
+          robot.brain.mergeData(results[0])
         else
-          robot.brain.emit 'loaded', {}
+          robot.brain.mergeData({})
       )
 
       robot.brain.on('save', (data) ->
-        collection.save(data, (err) ->
-          console.warn err if err?
-        )
+        if data?
+          collection.save(data, (err) ->
+            console.warn err if err?
+            robot.brain.mergeData(data) unless err?
+          )
       )
     )
   )

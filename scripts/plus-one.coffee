@@ -1,8 +1,8 @@
 class ScoreKeeper
   constructor: (@robot) ->
     @cache =
-      scoreLog: @robot.brain.data?.scoreLog || {}
-      scores: @robot.brain.data?.scores || {}
+      scoreLog: {}
+      scores: {}
 
     @robot.brain.on 'loaded', =>
       @robot.brain.data.scores ||= {}
@@ -11,6 +11,8 @@ class ScoreKeeper
       @cache.scores = @robot.brain.data.scores
       @cache.scoreLog = @robot.brain.data.scoreLog
 
+      console.log @cache
+
   getUser: (user) ->
     @cache.scores[user] ||= 0
     user
@@ -18,7 +20,7 @@ class ScoreKeeper
   saveUser: (user, from) ->
     @saveScoreLog(user, from)
     @robot.brain.data.scores[user] = @cache.scores[user]
-    @robot.brain.data.scoreLog[user] = @cache.scoreLog[user]
+    @robot.brain.data.scoreLog[from] = @cache.scoreLog[from]
     @robot.brain.emit('save', @robot.brain.data)
 
     @cache.scores[user]

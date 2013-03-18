@@ -1,8 +1,8 @@
 class ScoreKeeper
   constructor: (@robot) ->
     @cache =
-      scoreLog: @robot.brain.data.scoreLog || {}
-      scores: @robot.brain.data.scores || {}
+      scoreLog: @robot.brain.data?.scoreLog || {}
+      scores: @robot.brain.data?.scores || {}
 
     @robot.brain.on 'loaded', =>
       @robot.brain.data.scores ||= {}

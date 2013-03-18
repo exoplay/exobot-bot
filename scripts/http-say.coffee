@@ -23,8 +23,8 @@ module.exports = (robot) ->
     user.room = query.room if query.room
     user.type = query.type if query.type
 
-    console.log user
-    console.log query
-
-    res.end "Said #{query.message}"
-    robot.send(user, query.message)
+    if query.password = "sharetheair" #lol hardcoded password
+      res.end "Said #{query.message}"
+      robot.send(user, query.message)
+    else
+      res.end "ERROR::1924" #lol arbitrary error code

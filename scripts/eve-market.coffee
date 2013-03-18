@@ -113,8 +113,8 @@ module.exports = (robot) ->
 loadItemData = (msg, itemQuery, cb) ->
   return cb(itemIDCache[itemQuery]) if itemIDCache[itemQuery]
 
-  msg.http('http://util.eveuniversity.org/xml/itemLookup.php')
-    .query(name: itemQuery)
+  msg.http('hhttp://ec2-50-16-10-208.compute-1.amazonaws.com/api/items')
+    .query(query: { typeName: itemQuery })
     .get() (err, res, body) ->
       try
         itemData = parser.toJson(body, { object: true }).itemLookup

@@ -11,8 +11,6 @@ class ScoreKeeper
       @cache.scores = @robot.brain.data.scores
       @cache.scoreLog = @robot.brain.data.scoreLog
 
-      console.log @cache
-
   getUser: (user) ->
     @cache.scores[user] ||= 0
     user

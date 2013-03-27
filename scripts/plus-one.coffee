@@ -1,3 +1,6 @@
+_ = require("underscore")
+clark = require("clark").clark
+
 class ScoreKeeper
   constructor: (@robot) ->
     @cache =

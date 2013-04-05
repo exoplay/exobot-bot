@@ -17,14 +17,14 @@ jsdom = require('jsdom')
 
 module.exports = (robot) ->
 
-  robot.hear /http(s?):\/\/(.*)/i, (msg) ->
-    url = msg.match[0]
+  robot.hear /(http(?:s?):\/\/(\S*))/i, (msg) ->
+    url = msg.match[1]
 
     unless url.match(/\.(png|jpg|jpeg|gif|txt|zip|tar\.bz|js|css)/) # filter out some common files from trying
       jsdom.env(
-        html: msg.match[0]
+        html: url
         scripts: [
-          'http://code.jquery.com/jquery-1.7.2.min.js'
+          'http://code.jquery.com/jquery-1.9.1.min.js'
         ]
         done: (errors, window) ->
           unless errors
@@ -32,7 +32,7 @@ module.exports = (robot) ->
             title = $('title').text()
             description = $('meta[name=description]').attr("content") || ""
             description = "\n" + description if description
-            
+
             if title
               msg.send "#{title}#{description}"
         )

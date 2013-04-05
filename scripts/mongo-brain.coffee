@@ -32,32 +32,37 @@ module.exports = (robot) ->
   port = process.env.MONGODB_PORT || "27017"
   dbname = process.env.MONGODB_DB || "hubot"
 
+  error = (err) ->
+    console.log "==MONGO BRAIN UNAVAILABLE==\n==SWITCHING TO MEMORY BRAIN=="
+    console.log err
+    robot.brain.emit 'loaded', {}
+
   server = new Server(host, port, { })
   db = new Db(dbname, server, { w: 1, native_parser: true })
 
   db.open((err, client) ->
-    throw err if err
-
-    db.authenticate(user, pass, (err, success) ->
-      throw err if err
-
-      collection = new Collection(client, 'hubot_storage')
-
-      collection.find().limit(1).toArray((err, results) ->
-        if results?.length > 0
-          robot.brain.mergeData(results[0])
+    if err
+      error(err)
+    else
+      db.authenticate(user, pass, (err, success) ->
+        if err
+          error(err)
         else
-          robot.brain.mergeData({})
-      )
+          collection = new Collection(client, 'hubot_storage')
 
-      robot.brain.on('save', (data) ->
-        if data?
-          collection.save(data, (err) ->
-            console.warn err if err?
-            robot.brain.mergeData(data) unless err?
+          collection.find().limit(1).toArray((err, results) ->
+            if results
+              robot.brain.data = results[0]
+              robot.brain.emit 'loaded', results[0]
+            else
+              robot.brain.emit 'loaded', {}
           )
-      )
-    )
-  )
 
+          robot.brain.on('save', (data) ->
+            collection.save(data, (err) ->
+              console.warn err if err?
+            )
+          )
+        )
+      )
 

@@ -1,3 +1,22 @@
+# Description:
+#   Give or take away points. Keeps track and even prints out graphs.
+#
+# Dependencies:
+#   "underscore": ">= 1.0.0"
+#   "clark": "0.0.6"
+#
+# Configuration:
+#
+# Commands:
+#   <name>++
+#   <name>--
+#   hubot score <name>
+#   hubot top <amount>
+#   hubot bottom <amount>
+#
+# Author:
+#   ajacksified
+
 _ = require("underscore")
 clark = require("clark").clark
 
@@ -120,3 +139,5 @@ module.exports = (robot) ->
       message.splice(0, 0, clark(_.first(_.pluck(tops, "score"), graphSize)))
 
     msg.send message.join("\n")
+
+

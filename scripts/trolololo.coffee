@@ -1,3 +1,20 @@
+# Description:
+#   None
+#
+# Dependencies:
+#   None
+#
+# Configuration:
+#   HUBOT_IMGUR_CLIENT_ID
+#
+# Commands:
+#   trol.* - returns one of many alternative trollfaces when trolling is
+#   mentioned (troll, trolling, trolololololo...)
+#
+# Author:
+#   ajacksified
+
+
 https = require('https')
 
 options =
@@ -7,7 +24,7 @@ options =
     'Authorization': "Client-ID #{process.env.HUBOT_IMGUR_CLIENT_ID}"
 
 module.exports = (robot) ->
-  robot.hear /trol.*/i, (msg) ->
+  robot.hear /\btrol\w+?\b/i, (msg) ->
     data = []
 
     https.get(options, (res) ->
@@ -22,4 +39,5 @@ module.exports = (robot) ->
 
           msg.send(image.link)
     )
+
 

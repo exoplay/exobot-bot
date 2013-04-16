@@ -133,6 +133,7 @@ module.exports = (robot) ->
   nerdSays "DAVE", "http://i.imgur.com/rgkc6.png"
   nerdSays "NEFLARIA", "http://i.imgur.com/rDBPQ.png"
   nerdSays "DANNY", "http://i.imgur.com/tK8oe.png"
+  nerdSays "NINJA", "http://i.imgur.com/7CYm9hc.jpg"
   nerdSays "CHRIS", "http://i.imgur.com/TtVIj.png"
   nerdSays "SARAH", "http://i.imgur.com/Acgp3TP.jpg"
 

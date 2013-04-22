@@ -43,7 +43,8 @@ formatResults = (parameters, data) ->
       r.test(business.name)
     ) || data.businesses[(Math.random() * data.businesses.length) >> 0]
 
-    stars = ('★' for i in [0...business.rating]).join('')
+    console.log(business.rating)
+    stars = ('★' for i in [0...parseInt(business.rating)]).join('')
 
     if(business.rating > parseInt(business.rating)) then stars += '☆'
 

@@ -29,6 +29,8 @@ yelp = require("yelp").createClient(
   token_secret: process.env.HUBOT_YELP_TOKEN_SECRET
 )
 
+default_location = process.env.HUBOT_YELP_DEFAULT_LOCATION
+
 yelpMe = (msg, query, callback) ->
   yelp.search query, (error, data) ->
     callback(data) unless error
@@ -51,13 +53,28 @@ formatResults = (parameters, data) ->
 
 
 module.exports = (robot) ->
-  robot.respond /yelp( me)? (.*) (in|around|near) (.*)/i, (msg) ->
-    parameters = { term: msg.match[2], location: msg.match[4] }
+  robot.respond /yelp( me)? (.*) (in|around|near)?\s?(.*)?/i, (msg) ->
+    parameters = { term: msg.match[2], location: msg.match[4] || default_location }
     yelpMe msg, parameters, (data) ->
       msg.send(formatResults(parameters, data))
 
   robot.respond /lunch( me)?/i, (msg) ->
-    parameters = { term: 'lunch', location: '94103' }
+    parameters = { term: 'lunch', location: default_location }
+    yelpMe msg, parameters, (data) ->
+      msg.send(formatResults(parameters, data))
+
+  robot.respond /coffee( me)?/i, (msg) ->
+    parameters = { term: 'coffee', location: default_location }
+    yelpMe msg, parameters, (data) ->
+      msg.send(formatResults(parameters, data))
+
+  robot.respond /dinner( me)?/i, (msg) ->
+    parameters = { term: 'dinner', location: default_location }
+    yelpMe msg, parameters, (data) ->
+      msg.send(formatResults(parameters, data))
+
+  robot.respond /breakfast( me)?/i, (msg) ->
+    parameters = { term: 'breakfast', location: default_location }
     yelpMe msg, parameters, (data) ->
       msg.send(formatResults(parameters, data))
 

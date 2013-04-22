@@ -36,7 +36,17 @@ module.exports = (robot) ->
     yelpMe msg, { term: msg.match[2], location: msg.match[4] }, (data) ->
       if data.businesses.length > 0
         business = data.businesses[(Math.random() * data.businesses.length) >> 0]
-        template = "#{business.name} has rating of #{business.rating}/5 by #{business.review_count} people. It's at #{business.location.address}. Categories: #{business.categories.join(",")}. #{business.url}"
+        template = "#{business.name} [#{business.rating}/5 by #{business.review_count} people]\n#{business.url}\nhttps://www.google.com/maps?q=#{encodeURI(business.location.address)}\nCategories: #{business.categories.join(",")}"
         msg.send template
       else
         msg.send "Nothing found :("
+
+  robot.respond /lunch( me)?/i, (msg) ->
+    yelpMe msg, { term: 'lunch', location: '94103' }, (data) ->
+      if data.businesses.length > 0
+        business = data.businesses[(Math.random() * data.businesses.length) >> 0]
+        template = "#{business.name} [#{business.rating}/5 by #{business.review_count} people]\n#{business.url}\nhttps://www.google.com/maps?q=#{encodeURI(business.location.address)}\nCategories: #{business.categories.join(",")}"
+        msg.send template
+      else
+        msg.send "Nothing found :("
+

@@ -41,7 +41,11 @@ formatResults = (parameters, data) ->
       r.test(business.name)
     ) || data.businesses[(Math.random() * data.businesses.length) >> 0]
 
-    return "#{business.name} [#{business.rating} ★ by #{business.review_count}]\n#{business.url}\nhttps://www.google.com/maps?q=#{encodeURI(business.location.address)}\nCategories: #{business.categories.join(",")}"
+    stars = ('★' for i in [0...business.rating]).join('')
+
+    if(business.rating > parseInt(business.rating)) then stars += '☆'
+
+    return "#{business.name} #{stars}\n#{business.url}\nhttps://www.google.com/maps?q=#{encodeURI(business.location.address)}\nCategories: #{business.categories.join(",")}"
   else
     return "Nothing found :("
 
@@ -55,5 +59,5 @@ module.exports = (robot) ->
   robot.respond /lunch( me)?/i, (msg) ->
     parameters = { term: 'lunch', location: '94103' }
     yelpMe msg, parameters, (data) ->
-      msg.send(formatResults(term, location, data))
+      msg.send(formatResults(parameters, data))
 

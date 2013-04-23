@@ -1,6 +1,6 @@
 # clark - build sparklines out of data
 
-clark = require('clark').clark
+clark = require('clark')
 
 module.exports = (robot) ->
   robot.respond /clark (.*)/i, (msg) ->

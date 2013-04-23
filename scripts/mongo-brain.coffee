@@ -32,6 +32,8 @@ module.exports = (robot) ->
   port = process.env.MONGODB_PORT || "27017"
   dbname = process.env.MONGODB_DB || "hubot"
 
+  connected = false
+
   error = (err) ->
     console.log "==MONGO BRAIN UNAVAILABLE==\n==SWITCHING TO MEMORY BRAIN=="
     console.log err
@@ -53,16 +55,19 @@ module.exports = (robot) ->
           collection.find().limit(1).toArray((err, results) ->
             if results
               robot.brain.data = results[0]
-              robot.brain.emit 'loaded', results[0]
+              robot.brain.emit 'connected'
             else
-              robot.brain.emit 'loaded', {}
+              robot.brain.emit 'save'
+              robot.brain.emit 'connected'
+
+            connected = true
           )
 
-          robot.brain.on('save', (data) ->
-            collection.save(data, (err) ->
-              console.warn err if err?
-            )
+          robot.brain.on('save', () ->
+            if connected
+              collection.save(robot.brain.data, (err) ->
+                console.warn err if err?
+              )
           )
         )
       )
-

@@ -136,6 +136,8 @@ module.exports = (robot) ->
   nerdSays "NINJA", "http://i.imgur.com/7CYm9hc.jpg"
   nerdSays "CHRIS", "http://i.imgur.com/TtVIj.png"
   nerdSays "SARAH", "http://i.imgur.com/Acgp3TP.jpg"
+  nerdSays "RICHARD", "http://i.imgur.com/kzC5kJz.jpg"
+  nerdSays "RFOLIGNO", "http://i.imgur.com/kzC5kJz.jpg"
 
 QS = require "querystring"
 shittyNerdMemeGen = (msg, img_path, top_text, bottom_text, callback) ->

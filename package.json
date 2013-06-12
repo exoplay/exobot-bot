@@ -15,10 +15,10 @@
     "url": "git@github.com:Olivine-Labs/exobot.git"
   },
   "dependencies": {
-    "hubot": "2.5.0",
-    "hubot-scripts": "2.4.3",
+    "hubot": "2.5.3",
+    "hubot-scripts": "2.4.5",
     "optparse": "1.0.3",
-    "hubot-xmpp": "0.1.5",
+    "hubot-xmpp": "0.1.6",
     "cleverbot-node": "0.1.1",
     "querystring": "0.1.0",
     "jsdom": "0.6.0",

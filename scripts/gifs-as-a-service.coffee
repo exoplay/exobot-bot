@@ -24,9 +24,10 @@
 
 https = require('https')
 
+basePath = '/3/album/'
+
 options =
   hostname: 'api.imgur.com'
-  path: '/3/album/'
   headers:
     'Authorization': "Client-ID #{process.env.HUBOT_IMGUR_CLIENT_ID}"
 
@@ -43,7 +44,7 @@ albums =
 
 getGif = (album, cb) ->
   data = []
-  options.path = options.path + albums[album]
+  options.path = basePath + albums[album]
 
   https.get options, (res) ->
     if res.statusCode == 200

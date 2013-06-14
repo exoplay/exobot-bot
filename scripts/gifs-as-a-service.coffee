@@ -41,6 +41,7 @@ albums =
   upvote: "fG58m"
   downvote: "ixZeK"
   dance: "wy22z"
+  sadUpsetAngry: "qfkyX"
 
 getGif = (album, cb) ->
   data = []
@@ -95,5 +96,7 @@ module.exports = (robot) ->
     getGif 'dance', (link) ->
       msg.send(link)
 
-
+  robot.respond /(sad|upset|angry)/i, (msg) ->
+    getGif 'sadUpsetAngry', (link) ->
+      msg.send(link)
 

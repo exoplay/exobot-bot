@@ -28,7 +28,8 @@
     "querystring": "0.1.0",
     "underscore": "1.4.4",
     "xml2json": "0.3.2",
-    "yelp": "0.1.1"
+    "yelp": "0.1.1",
+    "clark": "0.0.5"
   },
   "engines": {
     "node": ">= 0.10.8",

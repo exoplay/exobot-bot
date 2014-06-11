@@ -15,21 +15,17 @@
     "url": "git@github.com:Olivine-Labs/exobot.git"
   },
   "dependencies": {
-    "hubot": "2.5.3",
-    "hubot-scripts": "2.4.5",
+    "hubot": "2.7.5",
+    "hubot-scripts": "2.5.14",
     "optparse": "1.0.3",
-    "hubot-xmpp": "0.1.6",
-    "cleverbot-node": "0.1.1",
+    "cleverbot-node": "0.1.8",
     "querystring": "0.1.0",
     "hubot-slack": "^2.1.0",
     "jsdom": "0.6.0",
-    "mongodb": "1.2.14",
-    "optparse": "1.0.3",
-    "querystring": "0.1.0",
-    "underscore": "1.4.4",
+    "underscore": "2.4.4",
     "xml2json": "0.3.2",
     "yelp": "0.1.1",
-    "clark": "0.0.5"
+    "clark": "0.0.6"
   },
   "engines": {
     "node": ">= 0.10.8",

@@ -1,1 +1,1 @@
-web: bin/hubot --alias '/' -a xmpp -n exobot
+web: bin/hubot --alias '/' -a slack -n exobot

@@ -1,1 +1,1 @@
-web: bin/hubot --alias ';' -a slack -n hubot
+web: bin/hubot --alias ';' -a slack -n slackbot

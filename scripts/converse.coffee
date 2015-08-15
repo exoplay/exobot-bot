@@ -25,6 +25,10 @@ class Messages
 
   all: -> @cache
 
+  clear: ->
+    @cache = []
+    @robot.brain.data.messages = @cache
+
   random: -> @cache[(Math.random() * (@cache.length - 1)) >> 0]
 
   buildRandomMessage: ->
@@ -95,6 +99,10 @@ module.exports = (robot) ->
         msg.send(c.message)
         messages.timeSinceLastCleverness = Date.now()
       )
+
+  robot.respond /clear/i, (msg) ->
+    messages.clear()
+    msg.send "Cleared history"
 
   # OL faces
   robot.hear /^u[m]+(.*)$/i, (msg) ->

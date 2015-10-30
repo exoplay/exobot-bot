@@ -135,3 +135,10 @@ module.exports = (robot) ->
     if ((Math.random() * chance) >> 0) == 0
       msg.send "http://i.imgur.com/UBhAX.png"
 
+  robot.hear /fast$/i, (msg) ->
+    chance = 10
+    if ((Math.random() * chance) >> 0) == 0
+      msg.send "http://i.imgur.com/H2p1aLu.jpg"
+
+  robot.hear /jackfast$/i, (msg) ->
+    msg.send "http://i.imgur.com/H2p1aLu.jpg"

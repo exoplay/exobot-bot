@@ -23,7 +23,7 @@ module.exports = (robot) ->
     user.room = query.room if query.room
     user.type = query.type if query.type
 
-    if query.password = "sharetheair" #lol hardcoded password
+    if query.password == "neflariaitis" #lol hardcoded password
       res.end "Said #{query.message}"
       robot.send(user, query.message)
     else

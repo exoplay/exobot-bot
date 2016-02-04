@@ -17,9 +17,9 @@
   "dependencies": {
     "clark": "^0.0.6",
     "cleverbot-node": "^0.2.1",
-    "hubot": "^2.15.0",
+    "hubot": "^2.18.0",
     "hubot-scripts": "^2.16.2",
-    "hubot-slack": "^3.3.0",
+    "hubot-slack": "^3.4.2",
     "jsdom": "^5.5.0",
     "optparse": "^1.0.4",
     "querystring": "^0.2.0",

@@ -2,7 +2,9 @@
 
 FROM iron/node
 
-WORKDIR /app
-ADD . /app
+ADD package.json package.json
+RUN NODE_ENV=development npm install
+
+ADD . .
 
 ENTRYPOINT ["bin/hubot", "--alias", "';'", "-a", "slack", "-n", "exobot"]

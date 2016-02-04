@@ -1,6 +1,13 @@
 # Dockerfile for reddit-mobile
 
-FROM iron/node
+FROM iron/base:edge
+
+RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories
+RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
+
+RUN apk update && apk upgrade \
+  && apk add nodejs@community \
+  && rm -rf /var/cache/apk/*
 
 ADD package.json package.json
 RUN NODE_ENV=development npm install

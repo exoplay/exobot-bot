@@ -1,2 +1,8 @@
-FROM node:0.10-onbuild
-CMD ["bin/hubot", "--alias", "';'", "-a", "slack", "-n", "exobot"]
+# Dockerfile for reddit-mobile
+
+FROM iron/node
+
+WORKDIR /app
+ADD . /app
+
+ENTRYPOINT ["bin/hubot", "--alias", "';'", "-a", "slack", "-n", "exobot"]

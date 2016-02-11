@@ -1,4 +1,4 @@
-FROM iron/node:dev
+FROM iron/node
 
 WORKDIR /tmp
 ADD package.json .

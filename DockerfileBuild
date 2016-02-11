@@ -1,28 +1,21 @@
-FROM iron/base:edge
-
-RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories
-RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
+FROM iron/node
 
 RUN apk update && apk upgrade && apk add\
-  nodejs@community \
-  python \
   docker \
-  g++ \
-  make \
-  bash \
-  iptables \
-  ca-certificates \
-  e2fsprogs \
   && rm -rf /var/cache/apk/*
 
+ENV DOCKER_HOST="unix:///var/run/docker.sock"
 WORKDIR /tmp
-
-ADD package.json .
-RUN NODE_ENV=development npm install
+RUN mkdir node_modules
+VOLUME /tmp/node_modules
 
 ADD Dockerfile .
+ADD DockerfileNpm .
+
+ADD package.json .
 ADD bin ./bin
 ADD scripts ./scripts
 
-ENV DOCKER_HOST="unix:///var/run/docker.sock"
-ENTRYPOINT docker build -t exobot .
+ENTRYPOINT docker build -t exobotnpm -f DockerfileNpm . \
+            && docker run --rm --volumes-from exobotbuild exobotnpm \
+            && docker build -t exobot .

@@ -1,0 +1,17 @@
+FROM iron/node:dev
+
+RUN apk update && apk upgrade && apk add\
+  python \
+  g++ \
+  make \
+  && rm -rf /var/cache/apk/*
+
+ENV NODE_ENV=development
+
+WORKDIR /tmp
+RUN mkdir node_modules
+VOLUME /tmp/node_modules
+
+ADD package.json .
+
+ENTRYPOINT /usr/bin/npm install --no-progress
